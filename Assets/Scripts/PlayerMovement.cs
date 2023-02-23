@@ -5,8 +5,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform button;
     public float maxSpeed;
-    private float currentSpeed = 0;
+    public bool isMoving = false;
     private int moveTouchId = -1;
+    private float currentSpeed = 0;
     private Vector3 center;
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
                             if (hit.transform.gameObject.name == "MoveButton")
                             {
                                 moveTouchId = touch.fingerId;
+                                isMoving = true;
                                 break;
                             }
                         }
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
                         {
                             button.position = center;
                             moveTouchId = -1;
+                            isMoving = false;
                         }
                         break;
                     }
@@ -60,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else moveTouchId = -1;
+        isMoving = false;
     }
 
     private void UseMouseInput()
@@ -72,12 +76,14 @@ public class PlayerMovement : MonoBehaviour
                 if (hit.transform.gameObject.name == "MoveButton")
                 {
                     moveTouchId = 1;
+                    isMoving = true;
                 }
             }
         }
         if (Input.GetMouseButtonUp(0) && moveTouchId > 0)
         {
             moveTouchId = -1;
+            isMoving = false;
             button.position = center;
         }
         if (moveTouchId > 0)
