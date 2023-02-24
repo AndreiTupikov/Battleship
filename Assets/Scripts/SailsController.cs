@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class SailsController : MonoBehaviour
 {
-    public Animator[] sails;
-    private bool isActive = false;
+    public bool isMoving = false;
+    private Animator[] sails;
+    private bool sailsUp = false;
+    private void Awake()
+    {
+        sails = transform.Find("Sails").GetComponentsInChildren<Animator>();
+    }
     private void Update()
     {
-        if (!isActive && gameObject.GetComponent<PlayerMovement>().isMoving)
+        if (isMoving && !sailsUp)
         {
-            isActive = true;
+            sailsUp = true;
             foreach (var sail in sails) sail.SetTrigger("Activate");
         }
-        if (isActive && !gameObject.GetComponent<PlayerMovement>().isMoving)
+        else if (!isMoving && sailsUp)
         {
-            isActive = false;
+            sailsUp = false;
             foreach (var sail in sails) sail.SetTrigger("Deactivate");
         }
     }

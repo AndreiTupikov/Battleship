@@ -4,6 +4,7 @@ public class BulletFlight : MonoBehaviour
 {
     public float speed;
     public float distance;
+    public GameObject splash;
     private float extraDistance;
     private float angleCorrection;
 
@@ -19,6 +20,8 @@ public class BulletFlight : MonoBehaviour
         distance -= 0.02f;
         if (distance + extraDistance < 0)
         {
+            GameObject s = Instantiate(splash, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(s, 1f);
             Destroy(gameObject);
         }
     }

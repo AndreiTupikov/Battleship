@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform button;
     public float maxSpeed;
-    public bool isMoving = false;
     private int moveTouchId = -1;
     private float currentSpeed = 0;
     private Vector3 center;
@@ -40,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
                             if (hit.transform.gameObject.name == "MoveButton")
                             {
                                 moveTouchId = touch.fingerId;
-                                isMoving = true;
+                                gameObject.GetComponent<SailsController>().isMoving = true;
                                 break;
                             }
                         }
@@ -55,15 +54,18 @@ public class PlayerMovement : MonoBehaviour
                         {
                             button.position = center;
                             moveTouchId = -1;
-                            isMoving = false;
+                            gameObject.GetComponent<SailsController>().isMoving = false;
                         }
                         break;
                     }
                 }
             }
         }
-        else moveTouchId = -1;
-        isMoving = false;
+        else
+        {
+            moveTouchId = -1;
+            gameObject.GetComponent<SailsController>().isMoving = false;
+        }
     }
 
     private void UseMouseInput()
@@ -76,14 +78,14 @@ public class PlayerMovement : MonoBehaviour
                 if (hit.transform.gameObject.name == "MoveButton")
                 {
                     moveTouchId = 1;
-                    isMoving = true;
+                    gameObject.GetComponent<SailsController>().isMoving = true;
                 }
             }
         }
         if (Input.GetMouseButtonUp(0) && moveTouchId > 0)
         {
             moveTouchId = -1;
-            isMoving = false;
+            gameObject.GetComponent<SailsController>().isMoving = false;
             button.position = center;
         }
         if (moveTouchId > 0)
