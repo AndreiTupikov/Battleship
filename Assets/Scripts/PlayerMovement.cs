@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Transform button;
-    public float maxSpeed;
     private int moveTouchId = -1;
     private float currentSpeed = 0;
     private Vector3 center;
@@ -39,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
                             if (hit.transform.gameObject.name == "MoveButton")
                             {
                                 moveTouchId = touch.fingerId;
-                                gameObject.GetComponent<SailsController>().isMoving = true;
                                 break;
                             }
                         }
@@ -54,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
                         {
                             button.position = center;
                             moveTouchId = -1;
-                            gameObject.GetComponent<SailsController>().isMoving = false;
                         }
                         break;
                     }
@@ -64,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moveTouchId = -1;
-            gameObject.GetComponent<SailsController>().isMoving = false;
         }
     }
 
@@ -78,14 +74,12 @@ public class PlayerMovement : MonoBehaviour
                 if (hit.transform.gameObject.name == "MoveButton")
                 {
                     moveTouchId = 1;
-                    gameObject.GetComponent<SailsController>().isMoving = true;
                 }
             }
         }
         if (Input.GetMouseButtonUp(0) && moveTouchId > 0)
         {
             moveTouchId = -1;
-            gameObject.GetComponent<SailsController>().isMoving = false;
             button.position = center;
         }
         if (moveTouchId > 0)
@@ -101,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (Math.Abs(newPos.x) > 0.75 || Math.Abs(newPos.y) > 0.75) newPos = newPos.normalized;
         button.position = center;
         button.Translate(newPos * 0.75f);
-        TurnPlayer(newPos);
+        if (gameObject.GetComponent<ShipStatus>().maxSpeed > 0) TurnPlayer(newPos);
     }
 
     private void TurnPlayer(Vector3 newPos)
@@ -118,9 +112,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedCorrection()
     {
-        if (moveTouchId < 0 && currentSpeed > 0) currentSpeed -= maxSpeed * 0.01f;
-        else if (moveTouchId >= 0 && currentSpeed < maxSpeed) currentSpeed += maxSpeed * 0.01f;
+        float maxSpeed = gameObject.GetComponent<ShipStatus>().maxSpeed;
+        if (maxSpeed == 0 && currentSpeed > 0 || moveTouchId < 0 && currentSpeed > 0)
+        {
+            currentSpeed -= 0.01f;
+            gameObject.GetComponent<SailsController>().isMoving = false;
+        }
+        else if (moveTouchId >= 0 && currentSpeed < maxSpeed)
+        {
+            currentSpeed += 0.01f;
+            gameObject.GetComponent<SailsController>().isMoving = true;
+        }
         if (currentSpeed > 0 && currentSpeed < 0.0001f) currentSpeed = 0;
+
     }
 
     private void MovePlayer()

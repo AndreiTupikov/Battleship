@@ -14,12 +14,12 @@ public class SailsController : MonoBehaviour
         if (isMoving && !sailsUp)
         {
             sailsUp = true;
-            foreach (var sail in sails) sail.SetTrigger("Activate");
+            foreach (var sail in sails) sail.SetFloat("Speed", 1f);
         }
         else if (!isMoving && sailsUp)
         {
             sailsUp = false;
-            foreach (var sail in sails) sail.SetTrigger("Deactivate");
+            foreach (var sail in sails) sail.SetFloat("Speed", 0f);
         }
     }
 }

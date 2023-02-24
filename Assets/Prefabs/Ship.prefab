@@ -225,7 +225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxSpeed: 1
   hitAnim: {fileID: 472808037803193831, guid: cd66e0834705f644d9e295a2248876d7, type: 3}
+  smokeCenter: {fileID: 25716125644211787, guid: 9c5c6aa0b0cbf7c49a47f4dd0f26c24e, type: 3}
 --- !u!1 &7760449195828569180
 GameObject:
   m_ObjectHideFlags: 0

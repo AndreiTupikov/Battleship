@@ -710,7 +710,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1263931051}
-  maxSpeed: 1
 --- !u!1001 &1591452186
 PrefabInstance:
   m_ObjectHideFlags: 0
