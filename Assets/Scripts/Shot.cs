@@ -7,6 +7,12 @@ public class Shot : MonoBehaviour
     public GameObject bullet;
     private bool isShooting = false;
     private float shotTime;
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponents<AudioSource>()[Random.Range(0, 3)];
+    }
 
     private void Update()
     {
@@ -20,6 +26,7 @@ public class Shot : MonoBehaviour
         {
             isShooting = false;
             Instantiate(bullet, transform.position, transform.rotation);
+            audioSource.Play();
         }
     }
 }

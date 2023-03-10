@@ -22,13 +22,14 @@ public class ShipStatus : MonoBehaviour
     {
         if (trigger.gameObject.CompareTag("Bullet"))
         {
+            Destroy(trigger.gameObject);
             health -= 10;
             Vector3 pos = trigger.transform.position;
             GameObject hit = Instantiate(hitAnim, pos, trigger.transform.rotation);
+            hit.GetComponents<AudioSource>()[Random.Range(0, 3)].Play();
             hit.transform.localScale += new Vector3(Random.Range(0f, 0.5f), Random.Range(0f, 0.5f), 0);
             Destroy(hit, 1f);
             if (Random.Range(0, 5) == 0) AddSmoke(pos);
-            Destroy(trigger.gameObject);
         }
     }
 
