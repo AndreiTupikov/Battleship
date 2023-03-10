@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public Text easyScore;
+    public Text mediumScore;
+    public Text hardScore;
+
     private void Update()
     {
 #if UNITY_EDITOR
@@ -10,6 +15,13 @@ public class MainMenu : MonoBehaviour
 #elif UNITY_ANDROID
         UseTouchScreenInput();
 #endif
+    }
+
+    private void Start()
+    {
+        easyScore.text += PlayerPrefs.GetInt("easy");
+        mediumScore.text += PlayerPrefs.GetInt("medium");
+        hardScore.text += PlayerPrefs.GetInt("hard");
     }
 
     private void UseTouchScreenInput()

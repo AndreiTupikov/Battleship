@@ -38,10 +38,10 @@ public class EnemyMovement : MonoBehaviour
         else if (gameObject.GetComponent<ShipStatus>().maxSpeed > 0)
         {
             Navigation();
-            SpeedCorrection();
-            MoveEnemy();
             Fire();
         }
+        SpeedCorrection();
+        MoveEnemy();
     }
 
     private void Navigation()

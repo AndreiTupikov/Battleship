@@ -10,6 +10,7 @@ public class ShipStatus : MonoBehaviour
     public float attackDistance;
     public GameObject hitAnim;
     public GameObject smokeCenter;
+    public GameObject defeatScreen;
     private bool defeated;
 
     private void Update()
@@ -41,6 +42,9 @@ public class ShipStatus : MonoBehaviour
             int score = int.Parse(GameObject.Find("Score").GetComponent<Text>().text.Split(' ')[1]) + 1;
             GameObject.Find("Score").GetComponent<Text>().text = "Score: " + score;
             AddNewEnemy();
+        } else if (gameObject.CompareTag("Player"))
+        {
+            defeatScreen.SetActive(true);
         }
     }
 

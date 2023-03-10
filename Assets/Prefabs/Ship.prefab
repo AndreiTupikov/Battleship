@@ -272,6 +272,7 @@ MonoBehaviour:
   attackDistance: 4
   hitAnim: {fileID: 472808037803193831, guid: cd66e0834705f644d9e295a2248876d7, type: 3}
   smokeCenter: {fileID: 25716125644211787, guid: 9c5c6aa0b0cbf7c49a47f4dd0f26c24e, type: 3}
+  defeatScreen: {fileID: 8200089431729959305, guid: 5f151f4674817254f88cd2f8fcd03aa2, type: 3}
 --- !u!114 &342895952012582204
 MonoBehaviour:
   m_ObjectHideFlags: 0
