@@ -4,7 +4,7 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     public GameObject ship;
-    public float rechargeTime;
+    private float rechargeTime;
     private float rightBoardReady;
     private float leftBoardReady;
     private Transform[] rightBoardGuns;
@@ -12,6 +12,7 @@ public class Fire : MonoBehaviour
 
     private void Awake()
     {
+        rechargeTime = ship.GetComponent<ShipStatus>().rechargeTime;
         rightBoardGuns = ship.transform.Find("RightBoard").GetComponentsInChildren<Transform>().Where(c => c.name != "RightBoard").Where(c => c.name != "GunSprite").ToArray();
         leftBoardGuns = ship.transform.Find("LeftBoard").GetComponentsInChildren<Transform>().Where(c => c.name != "LeftBoard").Where(c => c.name != "GunSprite").ToArray();
     }
